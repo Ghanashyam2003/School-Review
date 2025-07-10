@@ -30,6 +30,12 @@ def add_review():
         return redirect('/reviews')
     return render_template('add_review.html')
 
+
+@app.route('/')
+def home():
+    return redirect('/add-review')   # or '/reviews'
+
+
 @app.route('/reviews')
 def reviews():
     conn = get_db_connection()
