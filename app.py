@@ -46,5 +46,16 @@ def reviews():
     conn.close()
     return render_template('reviews.html', reviews=data)
 
+@app.route('/delete/<int:id>', methods=['POST'])
+def delete_review(id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM reviews WHERE id = %s", (id,))
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return redirect('/reviews')
+
+
 if __name__ == '__main__':
     app.run(debug=True)
